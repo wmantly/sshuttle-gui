@@ -4,6 +4,7 @@
   "description": "Front end for the python package sshuttle. sshuttle use SSH to create a poor names VPN with just SSH and iptables.",
   "main": "app.js",
   "scripts": {
+    "start": "electron app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
