@@ -1,0 +1,28 @@
+{
+  "name": "sshuttle-gui",
+  "version": "0.1.0",
+  "description": "Front end for the python package sshuttle. sshuttle use SSH to create a poor names VPN with just SSH and iptables.",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wmantly/sshuttle-gui.git"
+  },
+  "keywords": [
+    "shhuttle"
+  ],
+  "author": "William Mantly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wmantly/sshuttle-gui/issues"
+  },
+  "homepage": "https://github.com/wmantly/sshuttle-gui#readme",
+  "dependencies": {
+    "electron": "^2.0.8",
+    "electron-pubsub": "^0.2.2",
+    "request": "^2.88.0"
+  }
+}
