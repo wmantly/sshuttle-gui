@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/wmantly/sshuttle-gui/issues"
   },
-  "homepage": "https://github.com/wmantly/sshuttle-gui#readme"
+  "homepage": "https://github.com/wmantly/sshuttle-gui#readme",
+  "dependencies": {
+    "electron": "^2.0.8",
+    "electron-pubsub": "^0.2.2",
+    "request": "^2.88.0"
+  }
 }
