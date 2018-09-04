@@ -1,0 +1,94 @@
+Metadata-Version: 2.1
+Name: sshuttle
+Version: 0.78.4
+Summary: Full-featured" VPN over an SSH tunnel
+Home-page: https://github.com/sshuttle/sshuttle
+Author: Brian May
+Author-email: brian@linuxpenguins.xyz
+License: LGPL2.1+
+Keywords: ssh vpn
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Topic :: System :: Networking
+
+sshuttle: where transparent proxy meets VPN meets ssh
+=====================================================
+
+As far as I know, sshuttle is the only program that solves the following
+common case:
+
+- Your client machine (or router) is Linux, FreeBSD, or MacOS.
+
+- You have access to a remote network via ssh.
+
+- You don't necessarily have admin access on the remote network.
+
+- The remote network has no VPN, or only stupid/complex VPN
+  protocols (IPsec, PPTP, etc). Or maybe you *are* the
+  admin and you just got frustrated with the awful state of
+  VPN tools.
+
+- You don't want to create an ssh port forward for every
+  single host/port on the remote network.
+
+- You hate openssh's port forwarding because it's randomly
+  slow and/or stupid.
+
+- You can't use openssh's PermitTunnel feature because
+  it's disabled by default on openssh servers; plus it does
+  TCP-over-TCP, which has terrible performance (see below).
+
+
+Obtaining sshuttle
+------------------
+
+- Debian stretch or later::
+
+      apt-get install sshuttle
+
+- From PyPI::
+
+      sudo pip install sshuttle
+
+- Clone::
+
+      git clone https://github.com/sshuttle/sshuttle.git
+      cd sshuttle
+      sudo ./setup.py install
+
+It is also possible to install into a virtualenv as a non-root user.
+
+- From PyPI::
+
+      virtualenv -p python3 /tmp/sshuttle
+      . /tmp/sshuttle/bin/activate
+      pip install sshuttle
+
+- Clone::
+
+      virtualenv -p python3 /tmp/sshuttle
+      . /tmp/sshuttle/bin/activate
+      git clone https://github.com/sshuttle/sshuttle.git
+      cd sshuttle
+      ./setup.py install
+
+- Homebrew::
+
+      brew install sshuttle
+
+
+Documentation
+-------------
+The documentation for the stable version is available at:
+http://sshuttle.readthedocs.org/
+
+The documentation for the latest development version is available at:
+http://sshuttle.readthedocs.org/en/latest/
+
+

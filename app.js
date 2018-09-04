@@ -44,11 +44,13 @@ electron.app.once('ready', function () {
   const updateToolTip = function(){
     console.log("tooltip!")
     ip.get(function(error, body){
-      console.log("Updating tool tip!", body)
-      if(error || !body.IPAddress || !body.ISP ){
+      console.log("Updating tool tip!", !body, body)
+      if(error || !body ){
         tray.setToolTip('IP ERROR!');
         tray.setImage(tray.images.red);
+        return ;
       }
+
       let tor = body.TorExit === 'false' ? '' : `\nTor node: ${body.TorExit}`
       tray.setToolTip(`IP: ${body.IPAddress}\nISP: ${body.ISP}\nLocation: ${body.Location}, ${body.CountryCode}${tor}`  );
     });
