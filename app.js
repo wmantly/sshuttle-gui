@@ -41,33 +41,47 @@ electron.app.once('ready', function () {
     orange: __dirname +'/static/img/vpn_orange.png'
   }
 
-  const updateToolTip = function(){
-    console.log("tooltip!")
+  let tooltiplock = false;
+  const updateToolTip = function(color, message){
+    if(tooltiplock) return ;
+    tooltiplock = true;
+    
     ip.get(function(error, body){
-      console.log("Updating tool tip!", body)
-      if(error || !body.IPAddress || !body.ISP ){
+      tooltiplock = false;
+      
+      if(error || !body ){
         tray.setToolTip('IP ERROR!');
         tray.setImage(tray.images.red);
+        return ;
       }
       let tor = body.TorExit === 'false' ? '' : `\nTor node: ${body.TorExit}`
       tray.setToolTip(`IP: ${body.IPAddress}\nISP: ${body.ISP}\nLocation: ${body.Location}, ${body.CountryCode}${tor}`  );
     });
     
-  } 
+  }
+
+  setInterval(updateToolTip, 10000);
 
   pubsub.subscribe('sshuttle', function(data){
-    setTimeout(updateToolTip, 10);
+    // setTimeout(updateToolTip, 10);
   });
 
   pubsub.subscribe('sshuttle.connected', function(data){
     tray.setImage(tray.images.green);
-    // setTimeout(updateToolTip, 10);
+    setTimeout(updateToolTip, 10);
   });
 
   pubsub.subscribe('sshuttle.exit', function(data){
     tray.setImage(tray.images.red);
-    // setTimeout(updateToolTip, 10);
+    setTimeout(updateToolTip, 10);
+    setTimeout(pubsub.publish, 20, 'sshuttle.reconnect');
   });
+
+  pubsub.subscribe('sshuttle.reconnect', function(data){
+    tray.setImage(tray.images.orange);
+    tray.setToolTip('Connecting!')
+    setTimeout(sshuttle.start, 100);
+  })
 
 
   // window.tray = tray;
